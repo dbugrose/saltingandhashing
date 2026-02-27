@@ -77,7 +77,7 @@ Endpoints:
 
 ## Models
 
-### User Model
+### UserModel
 
 ```csharp 
 
@@ -86,7 +86,7 @@ string Username
 string Salt
 string Hash
 
-### Blog Model
+### BlogItemModel
 
 int Id
 int UserId
