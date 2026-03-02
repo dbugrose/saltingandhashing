@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using saltingandhashing.Services;
+using saltingandhashing.Services.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,7 @@ builder.Services.AddScoped<PasswordService>();
 builder.Services.AddScoped<UserService>();
 
 var connectionString = builder.Configuration.GetConnectionString("myBlogString2");
-builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<Context>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
