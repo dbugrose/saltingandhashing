@@ -16,7 +16,7 @@ builder.Services.AddScoped<PasswordService>();
 builder.Services.AddScoped<UserService>();
 
 var connectionString = builder.Configuration.GetConnectionString("myBlogString2");
-builder.Services.AddDbContext<Context>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 

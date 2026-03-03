@@ -10,8 +10,8 @@ using saltingandhashing.Services.Context;
 
 namespace saltingandhashing.Migrations
 {
-    [DbContext(typeof(Context))]
-    [Migration("20260302173228_init")]
+    [DbContext(typeof(DataContext))]
+    [Migration("20260303174556_init")]
     partial class init
     {
         /// <inheritdoc />
