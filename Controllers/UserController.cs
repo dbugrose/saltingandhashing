@@ -21,6 +21,7 @@ namespace saltingandhashing.Controllers
 
         //function to add our user type of CreateAccountDTO called UserToAdd, this will return a bool once our user is added
 
+        [HttpPost("AddUser")]
         public bool AddUser(CreateAccountDTO UserToAdd)
         {
             return _data.AddUser(UserToAdd);

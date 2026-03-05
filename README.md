@@ -105,17 +105,17 @@ bool isDeleted
 
 ```csharp
 
-###LoginModel
+###LoginModelDTO
 
     string Username
     string Password
 
-### CreateAccountModel
+### CreateAccountModelDTO
     int Id  = 0
     string Username
     string Password
 
-### PasswordModel
+### PasswordModelDTO
 
     string Salt
     string Hash
