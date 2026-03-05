@@ -1,15 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using saltingandhashing.Models;
 using saltingandhashing.Models.DTO;
 using saltingandhashing.Services.Context;
 
 namespace saltingandhashing.Services
 {
-    public class UserService
+    public class UserService : ControllerBase
     {
         private readonly DataContext _context;
         public UserService(DataContext context)
@@ -86,6 +92,50 @@ namespace saltingandhashing.Services
 
            var newHash = Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256));
            return newHash == StoredHash;
+        }
+
+        public IEnumerable<UserModel> GetAllUsers()
+        {
+           return _context.UserInfo;
+        }
+
+        public IActionResult Login(LoginDTO user)
+        {
+        IActionResult results = Unauthorized();
+
+            //if the user exists
+            if(DoesUserExist(user.Username)) 
+            {
+                //create a secret key used to sign the jtw toke
+                //this should be stored securely (not hardcoded in the product)
+                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("supersupersuperdupersecurekey@34456789"));
+                //create signing credentials using the secret key and HMACSHA256 algorithm
+                var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256); //this ensures the token can't be tampered with
+
+                //build the JWT token with metadata
+
+                var tokeOptions = new JwtSecurityToken(
+                    issuer: "https://localhost:5001",
+                    audience: "https://localhost:5001",
+                    claims: new List<Claim>(),
+                    expires: DateTime.Now.AddMinutes(5),
+                    signingCredentials: signingCredentials
+                );
+                    //convert the token opbect into string that can be sent to the client
+                var tokenString = new JwtSecurityTokenHandler(). WriteToken(tokeOptions);
+               // return the token as JSON to the client
+                results = Ok(new  {Token = tokenString});
+                
+                //return either the token(if user exists) or Unauthorized (if user does not exist)
+                
+            }
+            return results;
+
+        }
+
+        internal UserIdDTO GetUserIdDTOByUserName(string username)
+        {
+            throw new NotImplementedException();
         }
     }
 }
