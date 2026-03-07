@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("saltingandhashing")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f589584447ef35438fe0048e1a094cb1bc75f51d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+355e0de0dbdc98895c05d58be9c2b28158b324da")]
 [assembly: System.Reflection.AssemblyProductAttribute("saltingandhashing")]
 [assembly: System.Reflection.AssemblyTitleAttribute("saltingandhashing")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
